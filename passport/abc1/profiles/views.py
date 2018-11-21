@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 @login_required
 def product_create_view(request):
-	form = DetailsForm(request.POST)
+	form = DetailsForm(request.POST or None)
 	if form.is_valid():
 		appl = form.save(commit = False)
 		appl.user = request.user
