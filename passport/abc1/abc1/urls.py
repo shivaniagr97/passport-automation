@@ -28,10 +28,12 @@ urlpatterns = [
     url(r'^about/$', profile_views.about, name='about'),
     url(r'^profile/$', profile_views.userProfile, name='profile'),
     url(r'^contact/$', contact_views.contact, name='contact'),
-    url(r'^checkout/$', checkout_views.checkout, name='checkout'),
-    url(r'^regional_admin/$', profile_views.regional_admin, name='regional_admin'),
+    url(r'^thank_you/$', checkout_views.charge, name='checkout'),
+    url(r'^Applicant_Form/2/payment/$', checkout_views.checkout, name='checkout'),
     url(r'^admin_p/$', profile_views.admin_p, name='admin_p'),
     url(r'^police/$', profile_views.police, name='police'),
+    url(r'^Applicant_Form/$', profile_views.product_create_view, name='user_form'),
+    url(r'^Applicant_Form/2/$', profile_views.documents_view, name='user_form_2'),
     url(r'^accounts/', include('allauth.urls')),
 ]
 

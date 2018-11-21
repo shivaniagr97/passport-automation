@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import profile, userStripe
+from .models import profile, userStripe,Details,Documents
 
 class profileAdmin(admin.ModelAdmin):
 	class Meta:
@@ -12,4 +12,16 @@ class userStripeAdmin(admin.ModelAdmin):
 		model = userStripe
 
 admin.site.register(userStripe,userStripeAdmin)
+
+class detailsAdmin(admin.ModelAdmin):
+	class Meta:
+		model = Details
+
+admin.site.register(Details,detailsAdmin)
+
+class documentsAdmin(admin.ModelAdmin):
+	class Meta:
+		model = Documents
+
+admin.site.register(Documents,documentsAdmin)
 

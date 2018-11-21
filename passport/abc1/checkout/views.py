@@ -12,20 +12,23 @@ def checkout(request):
     customer_id = request.user.userstripe.stripe_id
 
     if request.method == 'POST':
-    
-        try:
-            stripe.Charge.create(
-              amount=2000,
-              currency="usd",
-              source="tok_visa", # obtained with Stripe.js
-              description="Charge for sofia.jones@example.com"
-            )
-
-        except stripe.error.CardError as e:
-            #the card was declined...
-            pass
-
+      stripe.Charge.create(
+        amount=2000,
+        currency="usd",
+        source="tok_visa", # obtained with Stripe.js
+        description="Charge for sofia.jones@example.com"
+      )
+      context = {}
+      template = 'charge.html'
+      return render(request,template,context)
+        
     user = request.user
     context = {'publishKey':publishKey}
     template = 'checkout.html'
+    return render(request,template,context)
+
+def charge(request):
+    
+    context = {}
+    template = 'charge.html'
     return render(request,template,context)

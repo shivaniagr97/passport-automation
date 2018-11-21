@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 
+{% block style%}
+	.row{
+		color: blue;
+		background-color: #F0F8FF;
+		font-style: italic;
 
+	}
+	#demo{
+		font-size: 10;
+		font-family: "Times New Roman", Times, serif;
+	}
+{% endblock %}
 
 {% block content %}
-<div class = "row">
-<p><center><h1>VISION</h1><br>To deliver passport services to citizens in a timely, transparent, more<br/>
+<div class = "row" id = "1">
+<p><center><h1><u>VISION</u></h1><br>To deliver passport services to citizens in a timely, transparent, more<br/>
 accessible, reliable manner and in a comfortable environment through<br/>
 streamlined processes and committed, trained and motivated workforce"<br/><br/></font></center></p>
 </div>
+<br/>
 
-<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">About Us</button>
-  <div id="demo" class="collapse">
+  <div id="demo" class = "collapse">
     <p>
     	<font size="3">
 		In recent years, the Government of India has taken many initiatives to usher in an era of e-Governance to improve the delivery of public services. The National e-Governance Plan (NeGP) includes many high impact e-Governance projects that have been identified as Mission Mode Projects (MMP's). One such project focuses on reforming Passport services in India.
@@ -25,4 +36,5 @@ streamlined processes and committed, trained and motivated workforce"<br/><br/><
 		</font>
 	</p>
    </div>
+   <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">About Us</button>
 {% endblock %}
