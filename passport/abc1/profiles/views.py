@@ -14,7 +14,7 @@ def product_create_view(request):
 	if user_payment.objects.filter(user = user, payment = 'successful').exists() :
 		# application_number = Details.
 		context = {}
-		template = 'dashboard.html'
+		template = 'redirect.html'
 		return render(request,template,context)
 
 	form = DetailsForm(request.POST or None)
@@ -26,6 +26,14 @@ def product_create_view(request):
 
 	context = {'form' : form}
 	template = 'form1.html'
+	return render(request,template,context)
+
+def dashboard(request):
+
+	data = Details.objects.filter(user = request.user)
+
+	context = {'data' : data}
+	template = 'dashboard.html'
 	return render(request,template,context)
 
 @login_required

@@ -10,6 +10,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class user_payment(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
+	applicant_number = models.CharField(max_length = 120,null = True)
 	payment = models.TextField(default = 'not paid')
 	
 	

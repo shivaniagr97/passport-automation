@@ -5,10 +5,30 @@
 .row{
  	background-color: #F0F8FF;
 }
+
+.r1{
+	font-color : black;
+	background-color: #F0F8FF;
+
+}
 {% endblock %}
+
 {% block content %}
 <div class="row" id = "1">
-	 WELCOME TO DASHBOARD .. <b>{{ user }} </b>        
+	<center>
+	{% for value in data %}<p> Welcome  <b>{{ value.name }}</p>{% endfor %}
+	</b>
+	
+	{% for value in data %}
+		<p>Application Number : <b> {{ value.aadhar_number }}P{{ value.pin_code }}_A_{{ value.city }}</b></p>
+	{% endfor %}
+	</center>
+</div>
+<br/><br/>
+<div class="panel panel-default">
+  <div class="panel-body">
+  	step - 1 : Application successfully submitted ... <br/>  
+  </div>
 </div>
 
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+{% endblock %}
+{% block content %}
+<div class="row" id = "1">
+	<center>
+	You have already applied for your passport  <b>{{ user }} </b>
+	<br/> Go to dashboard <br/>
+	<a href="{% url 'dashboard' %}" class="btn btn-success" role="button">Dashboard</a>
+	</center>    
+</div>
+
+{% endblock %}

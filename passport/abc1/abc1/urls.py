@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^$', profile_views.home, name='home'),
     url(r'^about/$', profile_views.about, name='about'),
     url(r'^profile/$', profile_views.userProfile, name='profile'),
+    url(r'^dashboard/$', profile_views.dashboard, name='dashboard'),
     url(r'^contact/$', contact_views.contact, name='contact'),
     url(r'^thank_you/$', checkout_views.charge, name='checkout'),
     url(r'^Applicant_Form/2/payment/$', checkout_views.checkout, name='checkout'),

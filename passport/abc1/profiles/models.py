@@ -17,6 +17,9 @@ class profile(models.Model):
 	def __unicode__(self):
 		return self.name
 
+
+
+
 class userStripe(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 	stripe_id = models.CharField(max_length = 200,null=True,blank = True )
