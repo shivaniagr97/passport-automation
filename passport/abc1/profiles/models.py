@@ -10,7 +10,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class profile(models.Model):
 	name = models.CharField(max_length = 120)
-	user = models.OneToOneField(settings.AUTH_USER_MODEL,null=True,blank=True)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL,null=True,blank=True,on_delete=models.CASCADE)
 	description = models.TextField(default = 'description default text')
 	
 	
@@ -18,7 +18,7 @@ class profile(models.Model):
 		return self.name
 
 class userStripe(models.Model):
-	user = models.OneToOneField(settings.AUTH_USER_MODEL)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 	stripe_id = models.CharField(max_length = 200,null=True,blank = True )
 
 	def __unicode__(self):
@@ -76,7 +76,7 @@ class Details(models.Model):
 
 	educational_qualification = models.CharField(max_length=100, choices = EDUCATIONAL_QUALIFICATION_CHOICES,null=True)
 
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 	def __unicode__(self):
 		return "PAS"+self.pin_code+"A"+self.aadhar_number
@@ -85,7 +85,7 @@ class Documents(models.Model):
 	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
 	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
 	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 def stripeCallback(sender, request, user, **kwargs):
 	#when user is logged in also want the model to create a profile for it

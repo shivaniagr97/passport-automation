@@ -9,7 +9,7 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class user_payment(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 	payment = models.TextField(default = 'not paid')
 	
 	
