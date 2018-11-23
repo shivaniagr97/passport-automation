@@ -4,9 +4,19 @@ from django.conf import settings
 from .forms import DetailsForm,DocumentsForm
 from .models import Details,Documents
 from django.http import HttpResponse, HttpResponseRedirect
+from checkout.models import user_payment
 
 @login_required
 def product_create_view(request):
+
+	user = request.user
+
+	if user_payment.objects.filter(user = user, payment = 'successful').exists() :
+		# application_number = Details.
+		context = {}
+		template = 'dashboard.html'
+		return render(request,template,context)
+
 	form = DetailsForm(request.POST or None)
 	if form.is_valid():
 		appl = form.save(commit = False)
