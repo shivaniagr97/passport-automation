@@ -2,6 +2,7 @@ from django.conf import settings
 from django.utils.datastructures import MultiValueDict as MVD
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from .models import user_payment
 import stripe
  
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -18,7 +19,11 @@ def checkout(request):
         source="tok_visa", # obtained with Stripe.js
         description="Charge for sofia.jones@example.com"
       )
+      
+      p = user_payment(user = request.user , payment = "successful")
+      p.save()
       context = {}
+
       template = 'charge.html'
       return render(request,template,context)
         
