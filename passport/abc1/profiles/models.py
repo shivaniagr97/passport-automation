@@ -79,6 +79,7 @@ class Details(models.Model):
 	educational_qualification = models.CharField(max_length=100, choices = EDUCATIONAL_QUALIFICATION_CHOICES,null=True)
 
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
+	date_of_appointment = models.DateField(null = True)
 
 	def __unicode__(self):
 		return "PAS"+self.pin_code+"A"+self.aadhar_number
