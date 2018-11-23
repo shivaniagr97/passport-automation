@@ -43,5 +43,6 @@ class DocumentsForm(forms.ModelForm):
 			'aadhar_card',
 			'address_proof',
 			'birth_certificate_or_matric_marksheet',
+			'photo'
 
 		]

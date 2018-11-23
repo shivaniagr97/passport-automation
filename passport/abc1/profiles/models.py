@@ -63,7 +63,7 @@ class Details(models.Model):
 
 	marital_status = models.CharField(max_length = 100, choices = MARITAL_STATUS_CHOICE,null = True)
 
-	date_of_birth = models.DateField(default=datetime.today())
+	date_of_birth = models.DateField(null = True)
 	birth_place = models.CharField(max_length=500,null=True)
 
 	employement_status = models.CharField(max_length=100, choices = EMPLOYEMENT_STATUS_CHOICES,null = True)
@@ -84,9 +84,10 @@ class Details(models.Model):
 		return "PAS"+self.pin_code+"A"+self.aadhar_number
 
 class Documents(models.Model):
-	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
-	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
-	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
+	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
+	photo = models.ImageField(upload_to = 'Documents/%Y/%m/%d/',null = True)
+	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 def stripeCallback(sender, request, user, **kwargs):

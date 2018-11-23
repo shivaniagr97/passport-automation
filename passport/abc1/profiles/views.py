@@ -44,7 +44,7 @@ def dashboard(request):
 		template = 'redirect-1.html'
 		return render(request,template,context)
 
-# @login_required
+@login_required
 def documents_view(request):
 
 	if Documents.objects.filter(user = request.user).exists() :
