@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.r1{
+	font-color : black;
+	background-color: #F0F8FF;
+
+}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<center>
+	<p> Welcome <b>Admin</p>
+	
+	New Applications arrived!
+</b>
+	</center>
+</div>
+
+<br/><br/>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  	<center>
+		      <a href="{% url 'admin_dashboard' %}" class="btn btn-success" role="button">Select Dates</a>&nbsp;
+		      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		      <a href="{% url 'admin_verify' %}" class="btn btn-success" role="button">Verify Application</a>
+	</center>
+
+
+  </div>
+</div>
+<br/>
+
+{% endblock %}

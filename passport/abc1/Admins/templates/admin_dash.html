@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.r1{
+	font-color : black;
+	background-color: #F0F8FF;
+
+}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<center>
+	<p> Welcome <b>Admin</p>
+	
+	New Applications arrived!
+</b>
+	</center>
+</div>
+
+<br/><br/>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  	
+  	<form method="POST" action="">{% csrf_token %}
+			{{form|crispy}}
+			<input type="submit" value="submit-form" class="btn btn-default">
+	</form>
+		
+  </div>
+</div>
+<br/>
+
+{% endblock %}

@@ -21,6 +21,8 @@ from django.contrib import admin
 from profiles import views as profile_views
 from contact import views as contact_views
 from checkout import views as checkout_views
+from Admins import views as admin_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,7 +33,9 @@ urlpatterns = [
     url(r'^contact/$', contact_views.contact, name='contact'),
     url(r'^thank_you/$', checkout_views.charge, name='checkout'),
     url(r'^Applicant_Form/2/payment/$', checkout_views.checkout, name='checkout'),
-    url(r'^admin_p/$', profile_views.admin_p, name='admin_p'),
+    url(r'^admin_home/$', admin_views.admin_home, name='admin_p'),
+    url(r'^admin_verify/$', admin_views.verify_app, name='admin_verify'),
+    url(r'^select_date/$', admin_views.dashboard, name='admin_dashboard'),
     url(r'^police/$', profile_views.police, name='police'),
     url(r'^Applicant_Form/$', profile_views.product_create_view, name='user_form'),
     url(r'^Applicant_Form/2/$', profile_views.documents_view, name='user_form_2'),

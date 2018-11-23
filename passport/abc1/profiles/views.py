@@ -6,6 +6,7 @@ from .models import Details,Documents
 from django.http import HttpResponse, HttpResponseRedirect
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
+from Admins.models import Dates
 
 @login_required
 def product_create_view(request):
@@ -34,8 +35,13 @@ def product_create_view(request):
 def dashboard(request):
 
 	if user_payment.objects.filter(user = request.user, payment = 'successful').exists() :
-		data = Details.objects.filter(user = request.user)
-		context = {'data' : data}
+		data = Details.objects.get(user = request.user)
+		data1 = user_payment.objects.get(user = request.user)
+		if Dates.objects.filter(applicant_number = data1.applicant_number).exists():
+			dates = Dates.objects.get(applicant_number = data1.applicant_number)
+			context = {'data' : data,'dates':dates,'step':2}
+		else:
+			context = {'data' : data,'step':1}
 		template = 'dashboard.html'
 		return render(request,template,context)
 

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     #----------adding payments----------------------------------------
     'checkout',
     'stripe',
+    'Admins',
 
 ]
 

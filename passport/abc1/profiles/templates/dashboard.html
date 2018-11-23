@@ -16,18 +16,23 @@
 {% block content %}
 <div class="row" id = "1">
 	<center>
-	{% for value in data %}<p> Welcome  <b>{{ value.name }}</p>{% endfor %}
+	<p> Welcome  <b>{{ data.name }}</p>
 	</b>
 	
-	{% for value in data %}
-		<p>Application Number : <b> {{ value.aadhar_number }}P{{ value.pin_code }}_A_{{ value.city }}</b></p>
-	{% endfor %}
+		<p>Application Number : <b> {{ data.aadhar_number }}P{{ data.pin_code }}_A_{{ data.city }}</b></p>
+	
 	</center>
 </div>
 <br/><br/>
 <div class="panel panel-default">
   <div class="panel-body">
-  	step - 1 : Application successfully submitted ... <br/>  
+  	{% if step == 1 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  	{% endif %}
+  	{% if step == 2 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Select Date between {{dates.from_date}} and {{dates.to_date}}
+  	{% endif %}
   </div>
 </div>
 
