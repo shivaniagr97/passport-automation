@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+{% endblock %}
+{% block content %}
+<div class="row" id = "1">
+	<center>
+	You have not completed your form as yet. Please complete your form first  <b>{{ user }} </b>
+	<br/> Go to form <br/>
+	<a href="{% url 'user_form' %}" class="btn btn-success" role="button">Form</a>
+	</center>    
+</div>
+
+{% endblock %}

@@ -12,10 +12,12 @@ def product_create_view(request):
 	user = request.user
 
 	if user_payment.objects.filter(user = user, payment = 'successful').exists() :
-		# application_number = Details.
 		context = {}
 		template = 'redirect.html'
 		return render(request,template,context)
+
+	if Details.objects.filter(user = user).exists() :
+		return HttpResponseRedirect('2')
 
 	form = DetailsForm(request.POST or None)
 	if form.is_valid():
@@ -30,14 +32,23 @@ def product_create_view(request):
 
 def dashboard(request):
 
-	data = Details.objects.filter(user = request.user)
+	if user_payment.objects.filter(user = request.user, payment = 'successful').exists() :
+		data = Details.objects.filter(user = request.user)
+		context = {'data' : data}
+		template = 'dashboard.html'
+		return render(request,template,context)
 
-	context = {'data' : data}
-	template = 'dashboard.html'
-	return render(request,template,context)
+	else :
+		context = {}
+		template = 'redirect-1.html'
+		return render(request,template,context)
 
 @login_required
 def documents_view(request):
+
+	if Documents.objects.filter(user = request.user).exists() :
+		return HttpResponseRedirect('payment')
+
 	form = DocumentsForm(request.POST or None ,request.FILES or None)
 	form.user = request.user
 	if form.is_valid():
