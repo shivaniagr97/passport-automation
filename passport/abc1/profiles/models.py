@@ -4,6 +4,7 @@ from django.conf import settings
 from allauth.account.signals import user_logged_in, user_signed_up
 from django.contrib.auth.models import User
 from django.utils.timezone import datetime
+from django.core.validators import FileExtensionValidator
 import stripe
  
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -16,8 +17,6 @@ class profile(models.Model):
 	
 	def __unicode__(self):
 		return self.name
-
-
 
 
 class userStripe(models.Model):
@@ -85,9 +84,9 @@ class Details(models.Model):
 		return "PAS"+self.pin_code+"A"+self.aadhar_number
 
 class Documents(models.Model):
-	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
-	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
-	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/')
+	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 def stripeCallback(sender, request, user, **kwargs):

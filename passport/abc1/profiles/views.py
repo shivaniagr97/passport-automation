@@ -5,6 +5,7 @@ from .forms import DetailsForm,DocumentsForm
 from .models import Details,Documents
 from django.http import HttpResponse, HttpResponseRedirect
 from checkout.models import user_payment
+from django.core.files.storage import FileSystemStorage
 
 @login_required
 def product_create_view(request):
@@ -43,7 +44,7 @@ def dashboard(request):
 		template = 'redirect-1.html'
 		return render(request,template,context)
 
-@login_required
+# @login_required
 def documents_view(request):
 
 	if Documents.objects.filter(user = request.user).exists() :
@@ -64,6 +65,7 @@ def documents_view(request):
 	template = 'user_form.html'
 
 	return render(request,template,context)
+
 
 def home(request):
 	context = {}
