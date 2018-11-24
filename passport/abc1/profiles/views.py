@@ -61,7 +61,7 @@ def dashboard(request):
 			send_mail(subject,message,emailFrom,emailTo,fail_silently=True,)
 			k = 0
 
-		if Details.objects.filter(date_of_appointment = q).exists():
+		if k == 0:
 			x = Details.objects.get(user = request.user)
 			pin = x.pin_code
 			x1 = RegAdmin.objects.get(pin_code = pin)
