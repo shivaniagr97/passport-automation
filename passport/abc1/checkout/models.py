@@ -15,4 +15,4 @@ class user_payment(models.Model):
 	
 	
 	def __unicode__(self):
-		return self.name
+		return unicode(self.user)

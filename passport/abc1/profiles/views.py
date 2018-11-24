@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.timezone import datetime
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
-from Admins.models import Dates,RegAdmin
+from Admins.models import Dates,RegAdmin,DocsVerified
 from django.core.mail import send_mail
 
 @login_required
@@ -43,11 +43,26 @@ def dashboard(request):
 		data = Details.objects.get(user = request.user)
 		data1 = user_payment.objects.get(user = request.user)
 
-		if Dates.objects.filter(applicant_number = data1.applicant_number).exists():
+		x = Details.objects.get(user = request.user)
+		pin = x.pin_code
+		x1 = RegAdmin.objects.get(pin_code = pin)
+		t = user_payment.objects.get(user = request.user)
+		y = DocsVerified.objects.get(applicant_number = t.applicant_number)
+
+		if DocsVerified.objects.filter(applicant_number = t.applicant_number).exists() :
+			print(y.verification_status)
+			if y.verification_status == 'Yes' :
+				context = {'data' : data,'step':4 , 'admin' : x1}
+			else:
+				context = {'data' : data,'step':-4 , 'admin' : x1}
+
+		elif x.date_of_appointment is not None:
+			context = {'data' : data,'date' : x.date_of_appointment,'step':3 , 'admin' : x1}
+
+		elif Dates.objects.filter(applicant_number = data1.applicant_number).exists():
 			dates = Dates.objects.get(applicant_number = data1.applicant_number)
 			context = {'data' : data,'dates':dates,'step':2}
 			q = request.GET.get('date')
-			x = Details.objects.get(user = request.user)
 			x.date_of_appointment = q
 			x.save()
 			pin = x.pin_code
