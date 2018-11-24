@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block style %}
 .row{
@@ -32,6 +33,15 @@
   	{% if step == 2 %}
   		step - 1 : Application successfully submitted ... <br/>
   		step - 2 : Select Date between {{dates.from_date}} and {{dates.to_date}}
+  		<form method="get" action="">{% csrf_token %}
+  			{{form|crispy}}
+			<input type = "date" name = "date">
+			<input type="submit" value="submit" class="btn btn-primary">
+		</form>
+  	{% endif %}
+  	{% if step == 3 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Date <b>{{ date }}</b> alloted for Appointment with Regional Administrator <b>{{ admin.name }}</b>
   	{% endif %}
   </div>
 </div>
