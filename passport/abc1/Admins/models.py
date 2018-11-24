@@ -27,5 +27,23 @@ class Dates(models.Model):
 class Appl(models.Model):
 	
 	applicant_number = models.CharField(max_length = 120,null = True)
+
+class VStatus(models.Model):
 	
+	VERIF_STATUS = (
+		('Yes','Yes') , ('No','No'),
+	)	
+	verification_status = models.CharField(max_length=100, choices = VERIF_STATUS ,null = False, default = 'No')
+
+
+class DocsVerified(models.Model):
+
+	applicant_number = models.CharField(max_length = 120,null = True)
+
+	VERIF_STATUS = (
+		('Yes','Yes') , ('No','No'),
+	)	
+	verification_status = models.CharField(max_length=100, choices = VERIF_STATUS ,null = False, default = 'No')
+
+
 

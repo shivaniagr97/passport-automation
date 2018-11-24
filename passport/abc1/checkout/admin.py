@@ -7,3 +7,4 @@ class paymentAdmin(admin.ModelAdmin):
 		model = user_payment
 
 admin.site.register(user_payment,paymentAdmin)
+

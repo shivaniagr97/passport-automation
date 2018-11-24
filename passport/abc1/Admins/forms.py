@@ -1,5 +1,5 @@
 from django import forms
-from .models import Dates,Appl
+from .models import Dates,Appl,VStatus
 
 
 
@@ -21,4 +21,13 @@ class ApplForm(forms.ModelForm):
 		fields = [
 			'applicant_number',
 
+		]
+
+
+class StatusForm(forms.ModelForm):
+	class Meta:
+		model = VStatus
+		fields = [
+			'verification_status' ,
+			
 		]
