@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.conf import settings
 from .forms import DetailsForm,DocumentsForm
-from .models import Details,Documents
+from .models import Details,Documents,profile
 from django.http import HttpResponse, HttpResponseRedirect
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
+from police.models import pdb,cdb
 
 @login_required
 def product_create_view(request):
@@ -78,9 +79,72 @@ def about(request):
 	return render(request,template,context)
 
 def police(request):
-	context = {}
-	template = 'police.html'
-	return render(request,template,context)
+
+	if request.method == "POST":
+
+
+		username = request.POST['username']
+		password = request.POST['password']
+		#print(username + password)
+
+		if pdb.objects.filter(name = username).exists():
+			#print("available")
+			obj = pdb.objects.get(name = username)
+			if obj.password == password:
+				context = {}
+				return render(request,'check.html',context)
+			else:
+				context={}
+				return render(request,'temp.html',context)
+		    	
+		    	
+		    				
+		else:
+			#print("not available")
+			context={}
+			return render(request,'police.html',context)
+
+	context={}	
+	return render(request,'police.html',context)        
+
+
+def test(request):
+	id = request.POST.get('userid','')
+	if user_payment.objects.filter(applicant_number= id).exists():
+		obj = user_payment.objects.get(applicant_number = id)
+		user = obj.user
+		#print("step 1")
+		if profile.objects.filter(user = user):
+			base = profile.objects.get(user = user)
+			name = base.name
+			#print("step 2")
+			if Details.objects.filter(name = name):
+				#print("step 3")
+				detobj = Details.objects.get(name = name)
+				context={'detobj': detobj}
+				return render(request,'details.html',context)
+			else:
+				context={}
+				return render(request,'temp.html',context)
+		else:
+			context={}
+			return render(request,'temp.html',context)
+	else :
+		print("wrong crdenilas")		
+	context={}
+	return render(request,'check.html',context)
+
+def validate(request):
+	adno = request.POST.get('adno','')
+	if cdb.objects.filter(aadhaarcard=adno):
+		context = {'data': "Applicant is a criminal hence not verified"}
+		return render(request,'verify.html',context)
+	else:
+		obj = Details.objects.get(aadhar_number = adno)
+		context={'data': "Applicant is not a criminal hence verified",'obj': obj}
+		return render(request,'verify.html',context)
+		context = {}
+	return request(request,'details.html',context)					
 
 def admin_p(request):
 	context = {}

@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.r1{
+	font-color : black;
+	background-color: #F0C8FF;
+
+}
+{% endblock %}
+
+{% block content %}
+
+<html>
+
+<head>
+</head>
+<body>
+<div class="row" id = "1">
+<center>
+ <h2> Enter Applicant No. :  </h2><br>
+ <form method="post" action="test/">
+ {% csrf_token %}
+ 
+ <input type="text" name="userid" placeholder="Applicant_no"><br><br>
+ <input type="submit" name="submit" value="check">
+ </form>
+ </center>
+ </div>	
+</body>
+</html>
+{% endblock %}

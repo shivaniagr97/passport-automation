@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'profiles',
     'contact',
     'crispy_forms',
+    'police',
     #-->all auth---copied from installation all auth django ---form authenticiation---
     'django.contrib.sites',
     'allauth',
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
     #----------adding payments----------------------------------------
     'checkout',
     'stripe',
+
 
 ]
 

@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^Applicant_Form/2/payment/$', checkout_views.checkout, name='checkout'),
     url(r'^admin_p/$', profile_views.admin_p, name='admin_p'),
     url(r'^police/$', profile_views.police, name='police'),
+    url(r'^police/test/$', profile_views.test, name='police_test'),
+    url(r'^police/test/validate/$', profile_views.validate, name='police_test_validate'),
     url(r'^Applicant_Form/$', profile_views.product_create_view, name='user_form'),
     url(r'^Applicant_Form/2/$', profile_views.documents_view, name='user_form_2'),
     url(r'^accounts/', include('allauth.urls')),

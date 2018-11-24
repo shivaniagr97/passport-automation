@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.r1{
+	font-color : black;
+	background-color: #F0F8FF;
+
+}
+{% endblock %}
+
+{% block content %}
+<div class="row" id = "1">
+	<center>
+<h2> The Details of the Applicant :  </h2>
+<h3>Name: {{detobj.name}}</h3> 
+<!-- <h1>{{detobj.city}}</h1><br>
+<h1>{{detobj.pin_code}}</h1>
+<h1>{{detobj.district}}</h1>
+<h1>{{detobj.contact_number}}</h1> -->
+<h3>Aadhar no: {{detobj.aadhar_number}}</h3>
+	</center>
+</div>
+<br>
+<div class="form-group"> <div id="div_id_remember" class="checkbox">
+<form method="post" action="validate/">
+ {% csrf_token %}
+<center>
+ <input type="text" name="adno" placeholder="  Aadhar number"><br><br>
+ <input type="submit" name="submit" value="check criminality">
+</form>
+</center>
+</div>
+</div>
+{% endblock %}
+ 

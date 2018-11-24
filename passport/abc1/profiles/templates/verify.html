@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.r1{
+	font-color : black;
+	background-color: #F0C8FF;
+
+}
+{% endblock %}
+
+{% block content %}
+<div class="row" id = "1">
+<center>
+<h1> {{data}}</h1>
+<h2> House_No : {{obj.house_no}}</h2>
+<h2> Colony_or_Location :  {{obj.colony_or_location}}</h2>
+<h2> City : {{obj.city}}</h2>
+<h2> District : {{obj.district}}</h2>
+<h2> State : {{obj.state}}</h2>
+</center>
+</div>
+{% endblock %}
