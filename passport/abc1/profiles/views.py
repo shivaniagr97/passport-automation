@@ -4,6 +4,7 @@ from django.conf import settings
 from .forms import DetailsForm,DocumentsForm
 from .models import Details,Documents
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.timezone import datetime
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
 from Admins.models import Dates,RegAdmin
@@ -59,13 +60,16 @@ def dashboard(request):
 			emailFrom= email
 			emailTo = [settings.EMAIL_HOST_USER]
 			send_mail(subject,message,emailFrom,emailTo,fail_silently=True,)
-			k = 0
+			
+			if x.date_of_appointment is not None:
+				k = 0
 
-		if k == 0:
-			x = Details.objects.get(user = request.user)
-			pin = x.pin_code
-			x1 = RegAdmin.objects.get(pin_code = pin)
-			context = {'data' : data,'date' : q,'step':3 , 'admin' : x1}
+
+			if k == 0:
+				x = Details.objects.get(user = request.user)
+				pin = x.pin_code
+				x1 = RegAdmin.objects.get(pin_code = pin)
+				context = {'data' : data,'date' : q,'step':3 , 'admin' : x1}
 			
 		else:
 			context = {'data' : data,'step':1}
