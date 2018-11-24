@@ -5,6 +5,7 @@ from django.shortcuts import render
 from profiles.models import Details
 from django.core.mail import send_mail
 from .models import user_payment
+from Admins.models import RegAdmin
 
 import stripe
  
@@ -16,7 +17,7 @@ def checkout(request):
     customer_id = request.user.userstripe.stripe_id
 
     x = Details.objects.get(user = request.user)
-    
+
     if request.method == 'POST':
       stripe.Charge.create(
         amount=2000,
@@ -29,10 +30,12 @@ def checkout(request):
                         payment = "successful")
       p.save()
 
+      pin = x.pin_code
+
+      x1 = RegAdmin.objects.get(pin_code = pin)
       email = x.email_id
-      print (email)
       name = x.name
-      comment = 'Applicant Number : '+str(x.aadhar_number)+'P'+str(x.pin_code)+'_A_'+x.city+'\n'+'Name : '
+      comment = 'Reg Admin Name : '+x1.name+'\nApplicant Number : '+str(x.aadhar_number)+'P'+str(x.pin_code)+'_A_'+x.city+'\n'+'Name : '
       subject='New Passport Application '
       message = '%s %s' %(comment,name)
       emailFrom= email

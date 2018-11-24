@@ -1,13 +1,38 @@
 {% extends 'base.html' %}
-
 {% load staticfiles %}
 
+{% block style %}
+.row{
+ 	background-color: #F0F8FF;
+}
+
+.row1{
+	font-color : black;
+	background-color: #F0F8EF;
+
+}
+{% endblock %}
+
 {% block content %}
+<div class="row" id = "1">
+	<center>
+	<p><h3><b> You have succesfully completed Stage - 1</h3></p></b>
+	</center>
+</div>
+<br/><br/>
+<div class="row1" id = "1">
+	<center>
+	<p> <h4>Stage - 2 Upload Documents</h4> </p>
+	</center>
+</div>
+<br/><br/>
+<div class="panel panel-default">
+	<center>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload</button>
   </form>
-
-  <p><a href="{% url 'home' %}">Return to home</a></p>
+	</center>
+</div>
 {% endblock %}

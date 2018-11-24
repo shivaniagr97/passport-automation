@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block style %}
 .row{
@@ -16,18 +17,32 @@
 {% block content %}
 <div class="row" id = "1">
 	<center>
-	{% for value in data %}<p> Welcome  <b>{{ value.name }}</p>{% endfor %}
+	<p> Welcome  <b>{{ data.name }}</p>
 	</b>
 	
-	{% for value in data %}
-		<p>Application Number : <b> {{ value.aadhar_number }}P{{ value.pin_code }}_A_{{ value.city }}</b></p>
-	{% endfor %}
+		<p>Application Number : <b> {{ data.aadhar_number }}P{{ data.pin_code }}_A_{{ data.city }}</b></p>
+	
 	</center>
 </div>
 <br/><br/>
 <div class="panel panel-default">
   <div class="panel-body">
-  	step - 1 : Application successfully submitted ... <br/>  
+  	{% if step == 1 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  	{% endif %}
+  	{% if step == 2 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Select Date between {{dates.from_date}} and {{dates.to_date}}
+  		<form method="get" action="">{% csrf_token %}
+  			{{form|crispy}}
+			<input type = "date" name = "date">
+			<input type="submit" value="submit" class="btn btn-primary">
+		</form>
+  	{% endif %}
+  	{% if step == 3 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Date <b>{{ date }}</b> alloted for Appointment with Regional Administrator <b>{{ admin.name }}</b>
+  	{% endif %}
   </div>
 </div>
 
