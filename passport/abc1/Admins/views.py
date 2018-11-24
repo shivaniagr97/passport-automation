@@ -27,7 +27,7 @@ def admin_login(request):
 
 
 	context={}
-	template = 'index.html'
+	template = 'login-1.html'
 	return render(request,template,context)
 
 
