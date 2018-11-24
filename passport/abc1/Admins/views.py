@@ -4,16 +4,33 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from checkout.models import user_payment
-from .models import Dates,Appl,DocsVerified,VStatus
+from .models import Dates,Appl,DocsVerified,VStatus,RegAdmin
 from django.contrib.auth.models import User
-from .forms import DatesForm,ApplForm,StatusForm
+from .forms import DatesForm,ApplForm,StatusForm,RegAdminForm
 from profiles.models import Documents
 
 
 global_appnNo = 0
+global_AdminUser = 0
+
+def admin_login(request):
+
+	mail = request.GET.get('email_id')
+	pswd = request.GET.get('password')
+
+	if RegAdmin.objects.filter( email_id = mail).exists():
+		useradmin = RegAdmin.objects.get( email_id = mail)
+		if useradmin.password == pswd :
+			global global_AdminUser
+			global_AdminUser =  useradmin
+			return HttpResponseRedirect('/admin_home/')
 
 
-@login_required
+	context={}
+	template = 'admin_login.html'
+	return render(request,template,context)
+
+
 def admin_home(request):
 	context = {}
 	template = 'admin_home.html'
@@ -50,22 +67,18 @@ def verify_app(request, *args, **kwargs):
 
 def verify_docs(request):
 
-	print("global variable = ")
-	print(global_appnNo)
 	#to get corresponding user object from user_payment table
 	user1 = user_payment.objects.get(applicant_number = global_appnNo )
-	#user3=user1.user
 	user2 = User.objects.get(username = user1.user.username)
 	#get the docs of that object
 	docs = Documents.objects.get( user = user2 )
-#	print(docs.aadhar_card.url )
-#	print(docs.photo.url )
 	
 	form = StatusForm(request.POST or None)
 	if form.is_valid():
 		obj = form.save()
 		p = DocsVerified(applicant_number = global_appnNo , verification_status = obj.verification_status)
    		p.save()
+   		return HttpResponseRedirect('/admin_home/')
 		# 
 	context = {'docs': docs , 'form' : form }
 	template = 'admin_verifyDocs.html'

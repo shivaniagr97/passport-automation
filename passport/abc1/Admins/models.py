@@ -8,14 +8,16 @@ from django.utils.timezone import datetime
 
 class RegAdmin(models.Model):
 	
+	password = models.CharField(max_length=20,null = False,default=123)
 	name = models.CharField(max_length=100,null = True)
 	address = models.CharField(max_length=100,null = True)
 	city = models.CharField(max_length=100,null = True)
 	state = models.CharField(max_length=100,null = True)
 	pin_code = models.CharField(max_length=6,null = True)
 	contact_number = models.CharField(max_length=20,null = True)
-	email_id = models.EmailField()
-	date_of_joining = models.DateField(null = True)
+	email_id = models.EmailField(null=False,default='reg1@gmail.com')
+	date_of_joining = models.DateField(default = datetime.today())
+	#user = models.ForeignKey(User,on_delete=models.CASCADE,default = 0 )
 
 class Dates(models.Model):
 	
