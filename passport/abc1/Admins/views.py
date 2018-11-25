@@ -80,6 +80,6 @@ def verify_docs(request):
 		p.save()
 		return HttpResponseRedirect('/admin_home/')
 		# 
-	context = {'docs': docs , 'form' : form }
+	context = {'docs': docs , 'form' : form,'appl':global_appnNo}
 	template = 'admin_verifyDocs.html'
 	return render(request,template,context)

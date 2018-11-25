@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block style %}
+.carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      max-height:300px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+
+{% endblock %}
+
 
  {% block jumbotron %}
- 	<div class="container"> 
+ <div class="container"> 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -77,4 +93,6 @@
 		    {% endif %}
         </div>
       </div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
 {% endblock %}
