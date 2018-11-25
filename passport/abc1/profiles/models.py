@@ -85,16 +85,11 @@ class Details(models.Model):
 		return "PAS"+self.pin_code+"A"+self.aadhar_number
 
 class Documents(models.Model):
-<<<<<<< HEAD
 	aadhar_card = models.FileField(null = True,upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 	address_proof = models.FileField(null = True,upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
 	birth_certificate_or_matric_marksheet = models.FileField(null = True,upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
-=======
-	aadhar_card = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
-	address_proof = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
 	photo = models.ImageField(upload_to = 'Documents/%Y/%m/%d/',null = True)
 	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
->>>>>>> 117e78d7587413f39afdef1d09bc870ca5f2eea8
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 def stripeCallback(sender, request, user, **kwargs):

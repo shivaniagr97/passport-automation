@@ -7,12 +7,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.timezone import datetime
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
-<<<<<<< HEAD
+
 from police.models import pdb,cdb
-=======
 from Admins.models import Dates,RegAdmin
 from django.core.mail import send_mail
->>>>>>> 117e78d7587413f39afdef1d09bc870ca5f2eea8
+
 
 @login_required
 def product_create_view(request):
@@ -178,11 +177,11 @@ def test(request):
 def validate(request):
 	adno = request.POST.get('adno','')
 	if cdb.objects.filter(aadhaarcard=adno):
-		context = {'data': "Applicant is a criminal hence not verified"}
+		context = {'data': "Applicant is a criminal hence not verified. "}
 		return render(request,'verify.html',context)
 	else:
 		obj = Details.objects.get(aadhar_number = adno)
-		context={'data': "Applicant is not a criminal hence verified",'obj': obj}
+		context={'data': "Applicant is not a criminal hence verified.",'obj': obj}
 		return render(request,'verify.html',context)
 		context = {}
 	return request(request,'details.html',context)					
