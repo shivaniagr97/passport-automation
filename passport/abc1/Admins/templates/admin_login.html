@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class = 'col-sm-6 col-sm-offset-3'>
+		<center><h3><b>Regional Administrator Login</b></h3>	</center>
+		<br/>
+<div class="panel panel-default">
+  <div class="panel-body">
+  	<center>
+
+  		<form method="get" action="">{% csrf_token %}
+			<input type = "text" name = "email_id" class = "form-control"><br/><br/>
+			<input type = "password" name = "password" class = "form-control"><br/><br/>
+		      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="Login" class="btn btn-primary">
+		</form>
+	</center>
+
+
+  </div>
+</div>
+
+		
+	</div>
+{% endblock %}

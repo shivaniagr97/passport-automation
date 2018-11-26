@@ -92,6 +92,7 @@ class Documents(models.Model):
 	birth_certificate_or_matric_marksheet = models.FileField(upload_to = 'Documents/%Y/%m/%d/',validators=[FileExtensionValidator(allowed_extensions=['pdf'])],null = True)
 	user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
+
 def stripeCallback(sender, request, user, **kwargs):
 	#when user is logged in also want the model to create a profile for it
 	user_stripe_account , created = userStripe.objects.get_or_create(user=user)

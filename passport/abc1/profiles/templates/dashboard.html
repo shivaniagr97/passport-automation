@@ -43,6 +43,18 @@
   		step - 1 : Application successfully submitted ... <br/>
   		step - 2 : Date <b>{{ date }}</b> alloted for Appointment with Regional Administrator <b>{{ admin.name }}</b>
   	{% endif %}
+
+  	{% if step == 4 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Date <b>{{ date }}</b> alloted for Appointment with Regional Administrator <b>{{ admin.name }}</b><br/>
+  		step - 3 : Regional Administrator <b>{{ admin.name }} verified the documents </b>
+  	{% endif %}
+
+  	{% if step == -4 %}
+  		step - 1 : Application successfully submitted ... <br/>
+  		step - 2 : Date <b>{{ date }}</b> alloted for Appointment with Regional Administrator <b>{{ admin.name }}</b><br/>
+  		step - 3 : Regional Administrator <b>{{ admin.name }} rejected the documents </b>
+  	{% endif %}
   </div>
 </div>
 
