@@ -1,22 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.conf import settings
-from .forms import DetailsForm,DocumentsForm
-from .models import Details,Documents,profile
+from .forms import DetailsForm,DocumentsForm,StatusForm
+from .models import Details,Documents,profile,Verified
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.timezone import datetime
 from checkout.models import user_payment
 from django.core.files.storage import FileSystemStorage
-<<<<<<< HEAD
-
 from police.models import pdb,cdb
 from Admins.models import Dates,RegAdmin
-=======
 from Admins.models import Dates,RegAdmin,DocsVerified
->>>>>>> 250d8b35c22c2a8f269dca0b6fe317feaa364f9c
 from django.core.mail import send_mail
 
 
+global_appnNo = 0
 @login_required
 def product_create_view(request):
 
@@ -45,7 +42,7 @@ def dashboard(request):
 
 	k = -1
 	q = -1
-
+	police = 0
 	if user_payment.objects.filter(user = request.user, payment = 'successful').exists() :
 		data = Details.objects.get(user = request.user)
 		data1 = user_payment.objects.get(user = request.user)
@@ -54,10 +51,18 @@ def dashboard(request):
 		pin = x.pin_code
 		x1 = RegAdmin.objects.get(pin_code = pin)
 		t = user_payment.objects.get(user = request.user)
-		y = DocsVerified.objects.get(applicant_number = t.applicant_number)
+		
+		if Verified.objects.filter(applicant_number = t.applicant_number).exists() :
+			y = Verified.objects.get(applicant_number = t.applicant_number)
+			if y.verification_status == 'Yes' :
+				context = {'data' : data,'step':5 }
+			else:
+				context = {'data' : data,'step':-5 }
 
-		if DocsVerified.objects.filter(applicant_number = t.applicant_number).exists() :
+		elif DocsVerified.objects.filter(applicant_number = t.applicant_number).exists() :
+			y = DocsVerified.objects.get(applicant_number = t.applicant_number)
 			print(y.verification_status)
+			print(police)
 			if y.verification_status == 'Yes' :
 				context = {'data' : data,'step':4 , 'admin' : x1}
 			else:
@@ -88,10 +93,14 @@ def dashboard(request):
 
 
 			if k == 0:
+
 				x = Details.objects.get(user = request.user)
 				pin = x.pin_code
 				x1 = RegAdmin.objects.get(pin_code = pin)
 				context = {'data' : data,'date' : q,'step':3 , 'admin' : x1}
+
+			if police == 1:
+				print ("Police!!!")
 			
 		else:
 			context = {'data' : data,'step':1}
@@ -139,13 +148,10 @@ def about(request):
 
 def police(request):
 
-	if request.method == "POST":
-
-
-		username = request.POST['username']
-		password = request.POST['password']
-		#print(username + password)
-
+	if request.method == "GET":
+		username = request.GET.get('username')
+		password = request.GET.get('password')
+		
 		if pdb.objects.filter(name = username).exists():
 			#print("available")
 			obj = pdb.objects.get(name = username)
@@ -168,26 +174,23 @@ def police(request):
 
 
 def test(request):
-	id = request.POST.get('userid','')
+	id = request.POST.get('userid')
+	global global_appnNo
+	global_appnNo = id
 	if user_payment.objects.filter(applicant_number= id).exists():
 		obj = user_payment.objects.get(applicant_number = id)
 		user = obj.user
-		#print("step 1")
-		if profile.objects.filter(user = user):
-			base = profile.objects.get(user = user)
-			name = base.name
-			#print("step 2")
-			if Details.objects.filter(name = name):
+		print(user)
+
+		if Details.objects.filter(user = user).exists():
 				#print("step 3")
-				detobj = Details.objects.get(name = name)
-				context={'detobj': detobj}
-				return render(request,'details.html',context)
-			else:
-				context={}
-				return render(request,'temp.html',context)
+			detobj = Details.objects.get(user = user)
+			context={'detobj': detobj}
+			return render(request,'details.html',context)
 		else:
 			context={}
 			return render(request,'temp.html',context)
+		
 	else :
 		print("wrong crdenilas")		
 	context={}
@@ -199,8 +202,15 @@ def validate(request):
 		context = {'data': "Applicant is a criminal hence not verified. "}
 		return render(request,'verify.html',context)
 	else:
+		form = StatusForm(request.POST or None)
+		if form.is_valid():
+			obj = form.save()
+			p = Verified(applicant_number = global_appnNo , verification_status = obj.verification_status)
+			p.save()
+			return HttpResponseRedirect('/')
+		# 
 		obj = Details.objects.get(aadhar_number = adno)
-		context={'data': "Applicant is not a criminal hence verified.",'obj': obj}
+		context={'data': "Applicant is not a criminal hence verified.",'obj': obj,'form':form}
 		return render(request,'verify.html',context)
 		context = {}
 	return request(request,'details.html',context)					

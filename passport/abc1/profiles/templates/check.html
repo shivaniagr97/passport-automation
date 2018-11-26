@@ -1,38 +1,20 @@
-
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
-{% block style %}
-.row{
- 	background-color: #F0F8FF;
-}
-
-.r1{
-	font-color : black;
-	background-color: #F0C8FF;
-
-}
-{% endblock %}
-
 {% block content %}
 
-<html>
+<div class = 'col-sm-6 col-sm-offset-3'>
+		<center><h2><b>Enter Application Number</b></h2>	</center>
 
-<head>
-</head>
-<body>
-<div class="row" id = "1">
-<center>
- <h2> Enter Applicant No. :  </h2><br>
- <form method="post" action="test/">
- {% csrf_token %}
- 
- <input type="text" name="userid" placeholder="Applicant_no"><br><br>
- <input type="submit" name="submit" value="check">
- </form>
+	 <form method="post" action="test/">
+	 {% csrf_token %}
+	<center>
+	 <input type="text" name="userid" placeholder="Applicant_no">
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 <input type="submit" name="submit" value="Go" >
+	 </form>
  </center>
  </div>	
-</body>
-</html>
+
 {% endblock %}
+

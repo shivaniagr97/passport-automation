@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import profile, userStripe,Details,Documents
+from .models import profile, userStripe,Details,Documents,Verified
 
 class profileAdmin(admin.ModelAdmin):
 	class Meta:
@@ -24,4 +24,9 @@ class documentsAdmin(admin.ModelAdmin):
 		model = Documents
 
 admin.site.register(Documents,documentsAdmin)
+
+class verification(admin.ModelAdmin):
+	class Meta :
+		model = Verified
+admin.site.register(Verified,verification)	
 

@@ -17,14 +17,31 @@
 {% endblock %}
 
 {% block content %}
-<div class="row" id = "1">
 <center>
-<h1> {{data}}</h1>
-<h2> House_No : {{obj.house_no}}</h2>
-<h2> Colony_or_Location :  {{obj.colony_or_location}}</h2>
-<h2> City : {{obj.city}}</h2>
-<h2> District : {{obj.district}}</h2>
-<h2> State : {{obj.state}}</h2>
+	<div class = "row">
+		<h2>POLICE ADDRESS VERIFICATION</h2>
+	</div>
+	<br/><br/>
+	<div class = "row">
+		<b>{{data}}</b>
+	</div>
+	<br/><br/>
+	<div class="panel panel-default">
+	  <div class="panel-body"> 
+	  	<b>House_No</b> : {{obj.house_no}} <br/><br/>
+		<b>Colony_or_Location</b> :  {{obj.colony_or_location}} <br/><br/>
+		<b>City</b> : {{obj.city}} <br/><br/>
+		<b>District</b> : {{obj.district}} <br/><br/>
+		<b>State</b> : {{obj.state}}<br/><br/>
+		<form method="POST" action="">{% csrf_token %}
+            {{form|crispy}}
+            <center>
+                <input type="submit" value="Update" class="btn btn-primary">
+            </center>
+        </form>
+	  </div>
+	</div>
 </center>
-</div>
+
+
 {% endblock %}

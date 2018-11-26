@@ -1,5 +1,5 @@
 from django import forms
-from .models import Details,Documents
+from .models import Details,Documents,Verified
 
 class DetailsForm(forms.ModelForm):
 	class Meta:
@@ -44,5 +44,13 @@ class DocumentsForm(forms.ModelForm):
 			'address_proof',
 			'birth_certificate_or_matric_marksheet',
 			'photo'
+
+		]
+
+class StatusForm(forms.ModelForm):
+	class Meta:
+		model = Verified
+		fields = [
+			'verification_status' ,
 
 		]
