@@ -7,42 +7,46 @@
   background-color: #F0F8FF;
 }
 
-.with-nav-tabs.panel-danger .nav-tabs > li > a,
-.with-nav-tabs.panel-danger .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > li > a:focus {
-  color: #a94442;
+.with-nav-tabs.panel-safe .nav-tabs > li > a,
+.with-nav-tabs.panel-safe .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > li > a:focus {
+  color: ##33ccff;
 }
-.with-nav-tabs.panel-danger .nav-tabs > .open > a,
-.with-nav-tabs.panel-danger .nav-tabs > .open > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > .open > a:focus,
-.with-nav-tabs.panel-danger .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > li > a:focus {
-  color: #a94442;
-  background-color: #ebccd1;
+.with-nav-tabs.panel-safe .nav-tabs > .open > a,
+.with-nav-tabs.panel-safe .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-safe .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > li > a:focus {
+  color: ##33ccff;
+  background-color: ##00cc99;
   border-color: transparent;
 }
-.with-nav-tabs.panel-danger .nav-tabs > li.active > a,
-.with-nav-tabs.panel-danger .nav-tabs > li.active > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > li.active > a:focus {
-  color: #a94442;
+.with-nav-tabs.panel-safe .nav-tabs > li.active > a,
+.with-nav-tabs.panel-safe .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > li.active > a:focus {
+  color: ##33ccff;
   background-color: #fff;
-  border-color: #ebccd1;
-  border-bottom-color: transparent;
+  border-top-color : black;
+  border-left-color : black;
+  border-right-color : black;
+<!--   border-color: black;
+ -->  border-bottom-color: ##00cc99;
+  
 }
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu {
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu {
     background-color: #f2dede; /* bg color */
-    border-color: #ebccd1; /* border color */
+    border-color: ##black; /* border color */
 }
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a {
-    color: #a94442; /* normal text color */  
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: ##009933; /* normal text color */
 }
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
-    background-color: #ebccd1; /* hover bg color */
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: ##00cc99; /* hover bg color */
 }
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-.with-nav-tabs.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-safe .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
     color: #fff; /* active text color */
     background-color: #a94442; /* active bg color */
 }
@@ -61,23 +65,23 @@
   <div class="col-md-3">
   </div>
   <div class="col-md-6">
-            <div class="panel with-nav-tabs panel-danger">
+            <div class="panel with-nav-tabs panel-safe">
                 <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1danger" data-toggle="tab">Picture Verification</a></li>
-                            <li><a href="#tab2danger" data-toggle="tab">Documents Verification</a></li>
-                            <li><a href="#tab3danger" data-toggle="tab">Status Update</a></li>
+                            <li class="active"><a href="#tab1" data-toggle="tab"><b>Picture Verification</b></a></li>
+                            <li><a href="#tab2" data-toggle="tab"><b>Documents Verification</b></a></li>
+                            <li><a href="#tab3" data-toggle="tab"><b>Status Update</b></a></li>
                             
                         </ul>
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1danger">
+                        <div class="tab-pane fade in active" id="tab1">
                           <br/><br/>
                           <img src= "{{docs.photo.url}}"  class = 'img-responsive'/>
                           <br/>
                         </div>
-                        <div class="tab-pane fade" id="tab2danger">
+                        <div class="tab-pane fade" id="tab2">
                           <br/><br/>
                           <a href="{{ docs.aadhar_card.url}}"> Aadhaar.pdf </a>
                           <br/><br/>
@@ -85,7 +89,7 @@
                           <br/><br/>
                           <a href="{{ docs.address_proof.url}}"> Address_proof.pdf </a><br/><br/>
                         </div>
-                        <div class="tab-pane fade" id="tab3danger">
+                        <div class="tab-pane fade" id="tab3">
                           <form method="POST" action="">{% csrf_token %}
                             {{form|crispy}}
                             <center>

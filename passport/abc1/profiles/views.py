@@ -192,7 +192,7 @@ def test(request):
 			return render(request,'temp.html',context)
 		
 	else :
-		print("wrong crdenilas")		
+		print("wrong crdentilas")		
 	context={}
 	return render(request,'check.html',context)
 
