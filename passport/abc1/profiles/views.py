@@ -146,6 +146,19 @@ def about(request):
 	template = 'about.html'
 	return render(request,template,context)
 
+def admin_p(request):
+	context = {}
+	template = 'admin_p.html'
+	return render(request,template,context)
+
+
+@login_required
+def userProfile(request):
+	user = request.user
+	context = {'user':user}
+	template = 'profile.html'
+	return render(request,template,context)
+
 def police(request):
 
 	if request.method == "GET":
@@ -215,15 +228,3 @@ def validate(request):
 		context = {}
 	return request(request,'details.html',context)					
 
-def admin_p(request):
-	context = {}
-	template = 'admin_p.html'
-	return render(request,template,context)
-
-
-@login_required
-def userProfile(request):
-	user = request.user
-	context = {'user':user}
-	template = 'profile.html'
-	return render(request,template,context)
